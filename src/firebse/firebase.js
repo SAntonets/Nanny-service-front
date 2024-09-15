@@ -48,7 +48,15 @@ export function addNannyes(nannyesCollection) {
 }
 
 
-const querySnapshot = await getDocs(collection(db, "nannyes"));
-export const babysits = querySnapshot.forEach((doc) => {
-  console.log(`${doc.id} => ${doc.data()}`);
-});
+const nannyesCollectionRef = collection(db, "nannyes");
+
+export const nannnnnn = getDocs(nannyesCollectionRef)
+  .then((snapshot) => {
+    // Перегляньте дані
+    snapshot.docs.forEach((doc) => {
+      console.log(doc.id, " => ", doc.data());
+    });
+  })
+  .catch((error) => {
+    console.error("Помилка отримання даних:", error);
+  });
