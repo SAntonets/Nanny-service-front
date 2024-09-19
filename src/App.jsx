@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { lazy, Suspense } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Home } from './pages/Home';
-import { Nannies } from './pages/Nannies';
-import { Favorites } from './pages/Favorites';
-import { NotFound } from './pages/NotFound';
+
+import NotFound from './pages/NotFound';
+import Home from './pages/Home';
+
 import Header from './components/Header/Header';
 
-function App() {
+
+const Nannies = lazy(() => import('./pages/Nannies.jsx'));
+const Favorites = lazy(() => import('./pages/Favorites.jsx'))
+
+const App = () => {
   return (
-    <>
+    <div>
       <Header />
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/nannies' element={<Nannies />} />
-        <Route path='/favorites' element={<Favorites />} />
-        <Route path='*' element={<NotFound />} />
+        <Suspense fallback={<div>Loading page...</div>}>
+        <Routes>
+          <Route path='/' element={<Home />} />
+          <Route path='/nannies' element={<Nannies />} />
+          <Route path='/favorites' element={<Favorites />} />
+          <Route path='*' element={<NotFound />} />
       </Routes>
-    </>
+</Suspense>
+    </div>
   );
 }
 
