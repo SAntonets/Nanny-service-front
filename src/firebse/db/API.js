@@ -1,4 +1,4 @@
-import { addDoc, collection } from "firebase/firestore/lite";
+import { addDoc, collection } from "firebase/firestore";
 import { db } from "../firebase";
 import { getDoc, doc, updateDoc, deleteDoc, query, where, getDocs, limit, startAfter,  } from 'firebase/firestore';
 
@@ -123,7 +123,7 @@ let currentPage = 1; // Поточний номер сторінки
 let lastDoc = null; // Зберігає останній документ з попередньої сторінки
 
 // Функція для отримання нянь
-async function getNannies() {
+export async function getNannies() {
   try {
     let q;
     if (lastDoc) {
@@ -155,10 +155,10 @@ getNannies().then(nannies => {
 });
 
 // При натисканні на кнопку "Load more"
-document.getElementById('loadMoreButton').addEventListener('click', () => {
-  currentPage++;
-  getNannies().then(nannies => {
-    renderNannies(nannies);
-  });
-});
+//document.getElementById('loadMoreButton').addEventListener('click', () => {
+//  currentPage++;
+//  getNannies().then(nannies => {
+//    renderNannies(nannies);
+//  });
+//});
 
