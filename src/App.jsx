@@ -18,17 +18,18 @@ const App = () => {
   return (
     <div>
       <Provider store={store}>
-      <AuthProvider/>
-      <Header />
-        <Suspense fallback={<div>Loading page...</div>}>
-        <Routes>
-          <Route path='/' element={<Home />} />
-          <Route path='/nannies' element={<Nannies />} />
-          <Route path='/favorites' element={<Favorites />} />
-          <Route path='*' element={<NotFound />} />
-      </Routes>
-        </Suspense>
-        </Provider>
+        <AuthProvider />
+          <Header />
+          <Suspense fallback={<div>Loading page...</div>}>
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/nannies' element={<Nannies />} />
+           <Route path='/favorites' element={<Favorites />} />
+           <Route path='*' element={<NotFound />} />
+            </Routes>
+          </Suspense>
+
+      </Provider>
     </div>
   );
 }

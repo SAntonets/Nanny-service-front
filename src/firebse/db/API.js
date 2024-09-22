@@ -144,21 +144,4 @@ export async function getNannies() {
   }
 }
 
-// Функція для рендерингу карток нянь
-function renderNannies(nannies) {
-  // ... (Код для рендерингу карток нянь)
-}
-
-// При першому завантаженні сторінки
-getNannies().then(nannies => {
-  renderNannies(nannies);
-});
-
-// При натисканні на кнопку "Load more"
-//document.getElementById('loadMoreButton').addEventListener('click', () => {
-//  currentPage++;
-//  getNannies().then(nannies => {
-//    renderNannies(nannies);
-//  });
-//});
 
