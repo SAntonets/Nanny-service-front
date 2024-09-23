@@ -7,6 +7,10 @@ const slice = createSlice({
   },
   reducers: {
     getNanniesList: (state, action) => {
+      return {
+        ...state,
+        nannies: [...state.nannies, action.payload]
+      }
     },
   }
 })

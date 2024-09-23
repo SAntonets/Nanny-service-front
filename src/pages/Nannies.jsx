@@ -11,20 +11,19 @@ const Nannies = () => {
     getNannies().then(nannies => {
       dispatch(getNanniesList(nannies))
     });
-    }, [dispatch])
+    }, [])
 
     const nanniesList = useSelector(state => state.nannies)
 
-  return (
-    {nanniesList.length != 0 ? <ul>
+  return (<>
+    nanniesList =! [] ? <ul>
       {nanniesList.map((nanny) => (
         <li key={nanny.id}>
           {nanny.name}, {nanny.experience} years experience
         </li>
       ))}
-    </ul>} : null
-
-  )
+    </ul> : null//+
+  </>)
 }
 
 export default Nannies;
