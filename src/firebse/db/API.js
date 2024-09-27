@@ -136,7 +136,7 @@ export async function getNannies() {
       id: doc.id,
       ...doc.data()
     }));
-    lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1]; // Зберігаємо останній документ
+    lastDoc = querySnapshot.docs[querySnapshot.docs.length - 1];// Зберігаємо останній документ
     return nannies;
   } catch (error) {
     console.error("Error getting documents: ", error);
