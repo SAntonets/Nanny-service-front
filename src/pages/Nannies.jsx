@@ -1,15 +1,23 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { getNanniesList } from '../redux/nanniesSlice'
-
+import React, { useEffect, useState } from 'react'
+import NannyCard from '../components/NannyCard/NannyCard'
+import { getNannies } from '../firebse/db/API'
 
 const Nannies = () => {
-  const dispatch = useDispatch();
-  useEffect(() => { dispatch(getNanniesList()), [] })
 
-  const nanniesList = useSelector(state => state.nannies)
+  const [nannies, setNannies] = useState(null)
+
+  useEffect(() => {
+    async function fetchNannies() {
+      const response = await getNannies;
+    }
+    fetchNannies();
+  }, [])
+
   return (
-    console.log(nanniesList)
+    <>
+      <div>Nannies</div>
+      <NannyCard />
+    </>
   )
 }
 
