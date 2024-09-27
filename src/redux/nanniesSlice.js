@@ -1,21 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const slice = createSlice({
+const nanniesSlice = createSlice({
   name: 'nannies',
   initialState: {
     nannies: [],
+    isLoading: false,
+    error: null,
   },
   reducers: {
-    getNanniesList: (state, action) => {
-      return {
-        ...state,
-        nannies: [...state.nannies, action.payload]
-      }
+    fetchingInProgress(state) {
+      state.isLoading = true;
     },
+    fetchingSuccess(state, action) {
+      state.isLoading = false;
+      state.nannies = action.payload;
+     },
+    fetchingError(state, action) {
+      state.isLoading = false;
+      state.error = action.payload;
+     },
   }
-})
+  })
 
-export const { getNanniesList } = slice.actions
-
-
-export default slice.reducer;
+export const { fetchingInProgress, fetchingSuccess, fetchingError } = nanniesSlice.actions;
