@@ -15,7 +15,7 @@ const Nannies = () => {
     const fetchNannies = async () => {
       try {
         setLoading(true);
-        const data = await getNanniesp();
+        const data = await getNannies();
         setNannies(data);
         setLoading(false);
       } catch (err) {
