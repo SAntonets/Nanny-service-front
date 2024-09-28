@@ -1,11 +1,9 @@
-import React from 'react'
+import React from 'react';
 
-const ErrorMesage = () => {
+const ErrorMessage = ({ message = "Ой, щось пішло не так... Перезавантажте будь ласка сторінку!" }) => {
   return (
-    <p>Ой, щось пішло не так... <br />
-      Перезавантажте будь ласка сторінку!
-    </p>
-  )
+    <p>{message}</p>
+  );
 }
 
-export default ErrorMesage
+export default ErrorMessage;

@@ -10,15 +10,17 @@ const Nannies = () => {
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
+
   useEffect(() => {
     const fetchNannies = async () => {
       try {
         setLoading(true);
-        const data = await getNannies();
+        const data = await getNanniesp();
         setNannies(data);
         setLoading(false);
       } catch (err) {
         setIsError(true);
+        console.log(err);
       } finally {
         setLoading(false);
       }
@@ -41,7 +43,7 @@ const Nannies = () => {
           <div>No nannies available.</div>
         )}
       </ul>
-      {isError && <ErrorMesage />}
+      {isError && <ErrorMesage/>}
     </>
   )
 }

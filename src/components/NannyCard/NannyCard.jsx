@@ -1,13 +1,13 @@
 import React from 'react'
 import { calculateAge } from '../../untils/ageCalc';
 
-const NannyCard = (nanny) => {
+const NannyCard = ({ nanny, ...rest }) => {
   return (
     <li>
-      <img src={nanny.nanny.avatar_url} alt={nanny.nanny.name} width={250}/>
+      <img src={nanny.avatar_url} alt={nanny.name} width={250}/>
       <p>Nanny</p>
-      <p>{nanny.nanny.name}</p>
-      <p>Age: {calculateAge(nanny.nanny.birthday) }</p>
+      <p>{nanny.name}</p>
+      <p>Age: {calculateAge(nanny.birthday) }</p>
     </li>
   )
 }
