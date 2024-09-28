@@ -5,6 +5,7 @@ import Home from './pages/Home';
 
 import Header from './components/Header/Header';
 import { AuthProvider } from './firebse/auth/auth.jsx';
+import Loader from './components/Loader/Loader.jsx';
 
 
 const Nannies = lazy(() => import('./pages/Nannies.jsx'));
@@ -17,13 +18,13 @@ const App = () => {
     <div>
         <AuthProvider />
           <Header />
-          <Suspense fallback={<div>Loading page...</div>}>
+          <Suspense fallback={<Loader />}>
           <Routes>
             <Route path='/' element={<Home />} />
             <Route path='/nannies' element={<Nannies />} />
-           <Route path='/favorites' element={<Favorites />} />
-           <Route path='*' element={<NotFound />} />
-            </Routes>
+            <Route path='/favorites' element={<Favorites />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
           </Suspense>
     </div>
   );

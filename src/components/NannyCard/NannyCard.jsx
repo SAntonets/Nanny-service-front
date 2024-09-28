@@ -3,12 +3,12 @@ import { calculateAge } from '../../untils/ageCalc';
 
 const NannyCard = (nanny) => {
   return (
-    <div>
-      <img src={nanny.nanny.avatar_url} alt="nannys photo" width={250}/>
+    <li>
+      <img src={nanny.nanny.avatar_url} alt={nanny.nanny.name} width={250}/>
       <p>Nanny</p>
       <p>{nanny.nanny.name}</p>
       <p>Age: {calculateAge(nanny.nanny.birthday) }</p>
-    </div>
+    </li>
   )
 }
 
