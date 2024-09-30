@@ -1,7 +1,8 @@
 import React from 'react'
 import { calculateAge } from '../../untils/ageCalc';
 
-const NannyCard = ({ nanny, ...rest }) => {
+const NannyCard = ({ nanny }) => {
+  const { user } = useAuth();
   return (
     <li>
       <img src={nanny.avatar_url} alt={nanny.name} width={250}/>
