@@ -4,8 +4,8 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 
 import Header from './components/Header/Header';
-import { AuthProvider } from './firebse/auth/auth.jsx';
 import Loader from './components/Loader/Loader.jsx';
+import AuthProvider from './firebse/auth/AuthProvider.js';
 
 
 const Nannies = lazy(() => import('./pages/Nannies.jsx'));
