@@ -2,10 +2,9 @@ import React from 'react'
 
 
 const UserPanel = () => {
-
   return (
  <div>
-    User Panel
+    Hello
   </div>
   )
 }

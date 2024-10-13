@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux"; // Використовуємо dispatch для Redux
 import { app } from "../firebase";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { setUser } from "../../redux/authSlice";
 
 const AuthProvider = () => {
   const dispatch = useDispatch();
