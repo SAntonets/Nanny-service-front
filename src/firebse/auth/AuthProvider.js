@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux"; // Використовуємо dispatch для Redux
 import { app } from "../firebase";
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { setUser } from "../../redux/authSlice";
+import { setAuthentication, setUser } from "../../redux/authSlice";
 
 const AuthProvider = () => {
   const dispatch = useDispatch();
@@ -18,7 +18,8 @@ const AuthProvider = () => {
           displayName: maybeUser.displayName,
           photoURL: maybeUser.photoURL,
         };
-        dispatch(setUser(user)); // Зберігаємо користувача в Redux
+        dispatch(setUser(user));
+        dispatch(setAuthentication(true))// Зберігаємо користувача в Redux
       } else {
         // Якщо користувач не авторизований, відкриваємо Google авторизацію
         const provider = new GoogleAuthProvider();
@@ -30,7 +31,8 @@ const AuthProvider = () => {
               email: user.email,
               displayName: user.displayName,
               photoURL: user.photoURL,
-            }));
+            }))
+            dispatch(setAuthentication(true));
           })
           .catch((err) => console.error("Login error:", err));
       }
