@@ -1,7 +1,7 @@
 import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react'
 import { app } from '../firebase';
-import { RecaptchaVerifier, signInWithPhoneNumber, signInWithPopup } from 'firebase/auth';
+import { signInWithPopup } from 'firebase/auth';
 import firebase from 'firebase/compat/app';
 
 const useAuth = () => {
@@ -20,40 +20,6 @@ const useAuth = () => {
       });
   }
 
-  const signInWithPhone = async (phoneNumber, setVerificationId) => {
-  const auth = getAuth();
-
-  if (!window.recaptchaVerifier) {
-    window.recaptchaVerifier = new RecaptchaVerifier(
-      'recaptcha-container',
-      {
-        size: 'invisible',
-        callback: (response) => {
-          console.log("reCAPTCHA пройдено");
-        }
-      },
-      auth
-    );
-  }
-
-  try {
-    const confirmationResult = await signInWithPhoneNumber(auth, phoneNumber, window.recaptchaVerifier);
-    setVerificationId(confirmationResult.verificationId);
-  } catch (error) {
-    console.error('Помилка входу через телефон:', error);
-  }
-};
-
-
-const confirmCode = async (verificationId, verificationCode) => {
-  const credential = firebase.auth.PhoneAuthProvider.credential(verificationId, verificationCode);
-  try {
-    await getAuth().signInWithCredential(credential);
-    console.log("Вхід виконано успішно");
-  } catch (error) {
-    console.error('Помилка при підтвердженні коду:', error);
-  }
-};
 
    const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
@@ -83,8 +49,6 @@ const confirmCode = async (verificationId, verificationCode) => {
 
    return {
     signInWithEmail,
-    signInWithPhone,
-    confirmCode,
     signInWithGoogle,
     signInWithApple,
     error,
