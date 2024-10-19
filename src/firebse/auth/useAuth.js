@@ -1,8 +1,8 @@
 import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { app } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
-import firebase from 'firebase/compat/app';
+
 
 const useAuth = () => {
 
