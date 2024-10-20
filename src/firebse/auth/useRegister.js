@@ -1,4 +1,5 @@
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, signInWithPopup } from "firebase/auth";
+import { GoogleAuthProvider } from "firebase/auth/web-extension";
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 
@@ -7,7 +8,7 @@ const useRegister = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
 
-  const signUpWhitEmail = async => {
+  const signUpWhitEmail = async (email, password) => {
     setError(null);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -23,4 +24,46 @@ const useRegister = () => {
     }
   }
 
-}
+  const signUpWithGoogle = async () => {
+    setError(null);
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      dispatch(setUser({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      }))
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  const signUpWithApple = async () => {
+    setError(null);
+    const provider = new OAuthProvider("apple.com");
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      dispatch(setUser({
+        uid: user.uid,
+        email: user.email,
+        displayName: user.displayName,
+        photoURL: user.photoURL,
+      }))
+    } catch (err) {
+      setError(err.message);
+    }
+  }
+
+  return {
+    signUpWhitEmail,
+    signUpWithGoogle,
+    signUpWithApple,
+    error,
+  };
+};
+
+export default useRegister;
