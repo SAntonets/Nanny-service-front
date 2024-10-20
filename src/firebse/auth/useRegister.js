@@ -1,7 +1,8 @@
-import { createUserWithEmailAndPassword, getAuth, signInWithPopup } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, OAuthProvider, signInWithPopup } from "firebase/auth";
 import { GoogleAuthProvider } from "firebase/auth/web-extension";
 import { useState } from "react"
 import { useDispatch } from "react-redux";
+import { setUser } from "../../redux/authSlice";
 
 const useRegister = () => {
   const [error, setError] = useState(null);
