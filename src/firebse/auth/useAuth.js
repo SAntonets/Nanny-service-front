@@ -1,7 +1,8 @@
-import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useState } from 'react'
 import { app } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
+import { clearUser } from '../../redux/authSlice';
 
 
 const useAuth = () => {
@@ -46,11 +47,23 @@ const useAuth = () => {
   };
 
 
+    const logout = async () => {
+      try {
+        await signOut(auth);
+        dispatchEvent(clearUser());
+      } catch (err) {
+        setError(err.message);
+        throw err;
+      }
+    }
+
+
 
    return {
     signInWithEmail,
     signInWithGoogle,
     signInWithApple,
+    logout,
     error,
   };
 }

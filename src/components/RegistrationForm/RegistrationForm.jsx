@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
-import useRegister from '../../firebse/auth/useRegister';
+import useRegister from '../../firebse/auth/useRegister'
 
 
 const RegisterForm = () => {
+
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -16,8 +18,6 @@ const RegisterForm = () => {
   return (
     <div>
       <h2>Register</h2>
-
-      {/* Реєстрація через email */}
       <form onSubmit={handleEmailSubmit}>
         <input
           type="email"
@@ -36,10 +36,8 @@ const RegisterForm = () => {
         <button type="submit">Sign Up with Email</button>
       </form>
 
-      {/* Реєстрація через Google */}
       <button onClick={signUpWithGoogle}>Sign Up with Google</button>
 
-      {/* Реєстрація через Apple */}
       <button onClick={signUpWithApple}>Sign Up with Apple</button>
 
       {error && <p>Error: {error}</p>}

@@ -9,7 +9,8 @@ const useRegister = () => {
   const dispatch = useDispatch();
   const auth = getAuth();
 
-  const signUpWhitEmail = async (email, password) => {
+  // Реєстрація через Email/Password
+  const signUpWithEmail = async (email, password) => {
     setError(null);
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
@@ -23,8 +24,9 @@ const useRegister = () => {
     } catch (err) {
       setError(err.message);
     }
-  }
+  };
 
+  // Реєстрація через Google
   const signUpWithGoogle = async () => {
     setError(null);
     const provider = new GoogleAuthProvider();
@@ -36,12 +38,13 @@ const useRegister = () => {
         email: user.email,
         displayName: user.displayName,
         photoURL: user.photoURL,
-      }))
+      }));
     } catch (err) {
       setError(err.message);
     }
-  }
+  };
 
+  // Реєстрація через Apple
   const signUpWithApple = async () => {
     setError(null);
     const provider = new OAuthProvider("apple.com");
@@ -53,14 +56,14 @@ const useRegister = () => {
         email: user.email,
         displayName: user.displayName,
         photoURL: user.photoURL,
-      }))
+      }));
     } catch (err) {
       setError(err.message);
     }
-  }
+  };
 
   return {
-    signUpWhitEmail,
+    signUpWithEmail, // Переконайтеся, що функція повертається
     signUpWithGoogle,
     signUpWithApple,
     error,
