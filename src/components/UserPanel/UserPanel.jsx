@@ -1,13 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-
+import useAuth from '../../firebse/auth/useAuth'
 
 const UserPanel = () => {
+  const { logout } = useAuth()
   const user = useSelector((state) => state.auth.user)
   if (user) {
   return (
  <div>
-    Hello {user.displayName}
+      <p>Hello {user.displayName}</p>
+      <button type='button' onClick={logout}>Log Out</button>
   </div>
     )
 }

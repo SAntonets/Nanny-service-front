@@ -3,9 +3,13 @@ import { useState } from 'react'
 import { app } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { clearUser } from '../../redux/authSlice';
+import { Navigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 
 const useAuth = () => {
+
+  const dispatch = useDispatch();
 
   const [error, setError] = useState(null);
   const auth = getAuth(app);
@@ -50,7 +54,8 @@ const useAuth = () => {
     const logout = async () => {
       try {
         await signOut(auth);
-        dispatchEvent(clearUser());
+        dispatch(clearUser());
+        Navigate("/");
       } catch (err) {
         setError(err.message);
         throw err;
