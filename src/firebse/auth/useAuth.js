@@ -1,26 +1,31 @@
-import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { browserLocalPersistence, getAuth, GoogleAuthProvider, OAuthProvider, setPersistence, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useState } from 'react'
 import { app } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { clearUser } from '../../redux/authSlice';
-import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const useAuth = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const auth = getAuth(app);
 
   const signInWithEmail = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
+    setPersistence(auth, browserLocalPersistence)
+      .then(() => {
+        return signInWithEmailAndPassword(auth, email, password)
+      })
       .then((userCredential) => {
         return userCredential.user;
       })
      .catch((error) => {
-        setError(error.message);
+       setError(error.message);
+       console.log(error);
         throw error;
       });
   }
@@ -55,7 +60,7 @@ const useAuth = () => {
       try {
         await signOut(auth);
         dispatch(clearUser());
-        Navigate("/");
+        navigate("/");
       } catch (err) {
         setError(err.message);
         throw err;
