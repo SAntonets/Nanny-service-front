@@ -1,4 +1,4 @@
-import { browserLocalPersistence, getAuth, GoogleAuthProvider, OAuthProvider, setPersistence, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { getAuth, GoogleAuthProvider, OAuthProvider, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { useState } from 'react'
 import { app } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
@@ -15,20 +15,16 @@ const useAuth = () => {
   const [error, setError] = useState(null);
   const auth = getAuth(app);
 
-  const signInWithEmail = (email, password) => {
-    setPersistence(auth, browserLocalPersistence)
-      .then(() => {
-        return signInWithEmailAndPassword(auth, email, password)
-      })
-      .then((userCredential) => {
-        return userCredential.user;
-      })
-     .catch((error) => {
-       setError(error.message);
-       console.log(error);
-        throw error;
-      });
+  const signInWithEmail = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    console.error("Sign in error:", error);
+    setError(error.message);
+    throw error;
   }
+};
 
 
    const signInWithGoogle = () => {
