@@ -3,27 +3,28 @@ import { useState } from 'react'
 import { app } from '../firebase';
 import { signInWithPopup } from 'firebase/auth';
 import { clearUser } from '../../redux/authSlice';
-import { Navigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 
 const useAuth = () => {
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [error, setError] = useState(null);
   const auth = getAuth(app);
 
-  const signInWithEmail = (email, password) => {
-    return signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        return userCredential.user;
-      })
-     .catch((error) => {
-        setError(error.message);
-        throw error;
-      });
+  const signInWithEmail = async (email, password) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    return userCredential.user;
+  } catch (error) {
+    console.error("Sign in error:", error);
+    setError(error.message);
+    throw error;
   }
+};
 
 
    const signInWithGoogle = () => {
@@ -55,7 +56,7 @@ const useAuth = () => {
       try {
         await signOut(auth);
         dispatch(clearUser());
-        Navigate("/");
+        navigate("/");
       } catch (err) {
         setError(err.message);
         throw err;

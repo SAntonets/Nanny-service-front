@@ -16,7 +16,7 @@ const AuthForm = () => {
             type="text"
             placeholder="Email"
           />
-          <input type="password" placeholder="Password" />
+          <input type="password" placeholder="Password" autoComplete="current-password" />
           <button type="button" onClick={signInWithEmail}>Sign in with Email</button>
         </div>
         <button type="button" onClick={signInWithGoogle}>Sign in with Google</button>
